@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Каталог недвижимости</title>
+<h2>Каталог недвижимости</h2>
+{% endblock %}
+
+{% block body %}
+
+
+<div>
+   <form id="data" action="/" method="POST">
+      <div style = "display: inline-flex; flex-flow: column wrap;">
+         <div>
+            <div>
+               Фильтр по площади
+            </div>
+            <div>
+               От <input name="square_min" type="number" size="10" min="0" value="{{ request.form.get('square_min') or 0 }}">
+               до <input name="square_max" type="number" size="10" min="0" value="{{ request.form.get('square_max') or 0 }}">
+            </div>
+         </div>
+         <div>
+            <div>
+               По этажу
+            </div>
+            <div>
+               От <input name="floor_min" type="number" size="10" min="0" value="{{ request.form.get('floor_min') or 0 }}">
+               до <input name="floor_max" type="number" size="10" min="0" value="{{ request.form.get('floor_max') or 0 }}">
+            </div>
+         </div>
+      </div>
+
+      <div style="display: inline-flex;">
+         <div>
+            <div>
+               По метро
+            </div>
+            <div>
+               <select multiple width="20" name="metro">
+                  <option value="-1">Не выбрано</option>
+                  <option value="0">Отсутствует</option>
+                  {% for m in metro %}
+                     <option value="{{m.id}}">{{m.title}}</option>
+                  {% endfor %}
+               </select>
+            </div>
+         </div>
+      </div>
+      <div>
+         <input type="submit" value="Фильтр">
+      </div>
+   </form>
+</div>
+<div>
+</div>
+
+<div>
+   {% for i, m in model.items() %}
+      <a href="/detail/{{i}}">{{m.title}}</a> <br/>
+   {% endfor %}
+</div>
+
+{% endblock %}

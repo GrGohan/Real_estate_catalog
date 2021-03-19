@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Детали недвижимости</title>
+
+<nav class="h5 my-0 me-md-auto fw-normal">
+    <h2>Детали недвижимости</h2>
+    <br/><a class="p-2 text-dark" href="/">Вернуться на главную</a>
+</nav><br/>
+{% endblock %}
+
+{% block body %}
+
+
+    Название: {{model.title}}<br/>
+    Адрес: {{model.address}}<br/>
+    Этаж: {{model.floor}}<br/>
+    Площадь: {{model.square}}<br/>
+    Тип: {{model.type}}<br/>
+    {% if model.metro | length != 0 %}
+    Метро: {% for m in model.metro[:-1] %} {{m}}, {% endfor %} {{model.metro[-1]}}
+    {% endif %}
+
+{% endblock %}
